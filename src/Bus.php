@@ -3,6 +3,8 @@
 namespace Domain
 {
 
+    use Domain\Handler\HandlerLocator;
+
     /**
      * Class BaseBus
      *
@@ -17,15 +19,23 @@ namespace Domain
         protected $invoker;
 
         /**
+         * @var HandlerLocator
+         */
+        protected $handlerLocator;
+
+        /**
          * BaseBus constructor.
          *
-         * @param Middleware[] $middlewares
+         * @param Middleware[]   $middlewares
+         * @param HandlerLocator $handlerLocator
          */
-        public function __construct(array $middlewares = [])
+        public function __construct(array $middlewares = [], HandlerLocator $handlerLocator = null)
         {
             $this->invoker = new Invoker($middlewares, function ($message) {
                 return $this->process($message);
             });
+
+            $this->handlerLocator = $handlerLocator;
         }
 
         /**

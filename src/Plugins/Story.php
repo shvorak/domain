@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Message
+namespace Domain\Plugins
 {
 
     /**

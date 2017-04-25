@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Middleware
+namespace Domain\Plugins
 {
 
     use Domain\Middleware;
@@ -20,7 +20,7 @@ namespace Domain\Middleware
         function execute($message, callable $next)
         {
             $name = get_class($message);
-            $story = $message instanceof \Domain\Message\Story ? $message->getStory() : '';
+            $story = $message instanceof Story ? $message->getStory() : '';
 
             $this->write($story, $name, 'Start handling');
             try {

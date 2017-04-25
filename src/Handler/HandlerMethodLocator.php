@@ -21,7 +21,7 @@ namespace Domain\Handler
          *
          * @return string
          */
-        public function resolve($message, $handler, $prefix = '');
+        public function resolve($message, $handler, $prefix = 'handle');
 
     }
 
