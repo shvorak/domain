@@ -1,0 +1,22 @@
+{
+    "name": "emerido/domain",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Aleksey Shvorak",
+            "email": "dr.emerido@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Domain\\" : "src/",
+            "Domain\\App\\" : "app/",
+            "Domain\\Tests\\" : "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.1",
+        "mockery/mockery": "^0.9.9",
+        "pimple/pimple": "^3.0"
+    }
+}

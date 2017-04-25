@@ -1,0 +1,5 @@
+app/
+tests/output/
+vendor/
+
+.idea
