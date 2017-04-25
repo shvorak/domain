@@ -45,7 +45,7 @@ namespace Domain
          *
          * @return mixed
          */
-        public function __invoke($message)
+        public function invoke($message)
         {
             return call_user_func($this->pipeline, $message);
         }

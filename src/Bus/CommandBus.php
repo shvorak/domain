@@ -22,7 +22,7 @@ namespace Domain\Bus
          */
         public function execute($message)
         {
-            return $this->invoker->__invoke($message);
+            return $this->invoker->invoke($message);
         }
 
         /**
