@@ -3,6 +3,8 @@
 namespace Domain
 {
 
+    use Domain\Error\InvalidMiddleware;
+
     class Invoker
     {
 
@@ -23,17 +25,25 @@ namespace Domain
         }
 
         /**
+         * Create execution pipeline
+         *
          * @param Middleware[] $middlewares
          * @param callable     $next
          *
-         * @return callable|\Closure
+         * @throws InvalidMiddleware
+         *
+         * @return callable
          */
         protected function create(array $middlewares, callable $next)
         {
             while ($middleware = array_pop($middlewares)) {
-                $next = function ($message) use ($middleware, $next) {
-                    return $middleware->execute($message, $next);
-                };
+                if ($middleware instanceof Middleware) {
+                    $next = function ($message) use ($middleware, $next) {
+                        return $middleware->execute($message, $next);
+                    };
+                } else {
+                    throw new InvalidMiddleware('Middleware must be instance of Middleware interface');
+                }
             }
             return $next;
         }

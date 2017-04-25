@@ -3,6 +3,7 @@
 namespace Domain\Tests
 {
 
+    use Domain\Bus\CommandBus;
     use Domain\Middleware;
 
     use Domain\Tests\Fixtures\Commands\AddTask;
