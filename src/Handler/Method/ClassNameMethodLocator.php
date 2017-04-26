@@ -5,7 +5,7 @@ namespace Domain\Handler\Method
 
     use Domain\Handler\HandlerMethodLocator;
 
-    class ClassNameBasedMethodLocator implements HandlerMethodLocator
+    class ClassNameMethodLocator implements HandlerMethodLocator
     {
 
         /**

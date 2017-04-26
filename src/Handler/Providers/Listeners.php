@@ -3,6 +3,11 @@
 namespace Domain\Handler\Providers
 {
 
+    /**
+     * Class Listeners
+     *
+     * @package Domain\Handler\Providers
+     */
     class Listeners extends Map
     {
 

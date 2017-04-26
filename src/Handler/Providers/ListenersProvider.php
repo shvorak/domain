@@ -3,6 +3,11 @@
 namespace Domain\Handler\Providers
 {
 
+    /**
+     * Interface ListenersProvider
+     *
+     * @package Domain\Handler\Providers
+     */
     interface ListenersProvider
     {
 

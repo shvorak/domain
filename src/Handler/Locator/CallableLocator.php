@@ -5,6 +5,11 @@ namespace Domain\Handler\Locator
 
     use Domain\Handler\HandlerLocator;
 
+    /**
+     * Class CallableLocator
+     *
+     * @package Domain\Handler\Locator
+     */
     class CallableLocator implements HandlerLocator
     {
 

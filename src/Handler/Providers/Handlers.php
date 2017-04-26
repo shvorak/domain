@@ -5,6 +5,11 @@ namespace Domain\Handler\Providers
 
     use Domain\Error\HandlerDuplication;
 
+    /**
+     * Class Handlers
+     *
+     * @package Domain\Handler\Providers
+     */
     class Handlers extends Map
     {
 

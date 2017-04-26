@@ -5,6 +5,11 @@ namespace Domain\Handler\Providers
 
     use Domain\Error\HandlerNotFound;
 
+    /**
+     * Class Map
+     *
+     * @package Domain\Handler\Providers
+     */
     abstract class Map
     {
 
