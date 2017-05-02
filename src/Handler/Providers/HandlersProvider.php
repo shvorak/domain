@@ -14,11 +14,11 @@ namespace Domain\Handler\Providers
         /**
          * Register handlers
          *
-         * @param Handlers $bus
+         * @param Handlers $map
          *
          * @return void
          */
-        public function register(Handlers $bus);
+        public function register(Handlers $map);
 
     }
 

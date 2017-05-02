@@ -1,16 +1,12 @@
 <?php
 
-namespace Domain\Message
+namespace Domain\Handler\Message
 {
 
-    /**
-     * Class ClassBased
-     *
-     * Class based message name extractor
-     *
-     * @package Domain\Message
-     */
-    class ClassBased implements NameExtractor
+
+    use Domain\Handler\MessageNameExtractor;
+
+    class ClassBasedName implements MessageNameExtractor
     {
 
         /**
@@ -20,7 +16,7 @@ namespace Domain\Message
          *
          * @return string
          */
-        public function resolve($message)
+        public function extract($message)
         {
             return get_class($message);
         }

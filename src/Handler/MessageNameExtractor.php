@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Message
+namespace Domain\Handler
 {
 
     /**
@@ -8,7 +8,7 @@ namespace Domain\Message
      *
      * @package Domain\Message
      */
-    interface NameExtractor
+    interface MessageNameExtractor
     {
 
         /**
@@ -18,7 +18,7 @@ namespace Domain\Message
          *
          * @return string
          */
-        public function resolve($message);
+        public function extract($message);
 
     }
 

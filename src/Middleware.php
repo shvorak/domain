@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Domain
 {
 
@@ -14,12 +15,13 @@ namespace Domain
         /**
          * Wrap any message execution
          *
-         * @param object   $message
-         * @param callable $next
+         * @param object   $message Message instance
+         * @param object   $handler Message handler instance
+         * @param callable $next    Next handler
          *
-         * @return mixed|void
+         * @return mixed
          */
-        function execute($message, callable $next);
+        function execute($message, $handler, callable $next);
 
     }
 

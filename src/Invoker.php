@@ -11,7 +11,12 @@ namespace Domain
         /**
          * @var callable
          */
-        private $pipeline;
+        private $last;
+
+        /**
+         * @var Middleware[]
+         */
+        private $middlewares;
 
         /**
          * Invoker constructor.
@@ -21,25 +26,27 @@ namespace Domain
          */
         public function __construct(array $middlewares, callable $last)
         {
-            $this->pipeline = $this->create($middlewares, $last);
+            $this->last = $last;
+            $this->middlewares = $middlewares;
         }
 
         /**
          * Create execution pipeline
          *
-         * @param Middleware[] $middlewares
-         * @param callable     $next
+         * @param $message
+         * @param $handler
          *
          * @throws InvalidMiddleware
          *
          * @return callable
          */
-        protected function create(array $middlewares, callable $next)
+        protected function create($message, $handler)
         {
-            while ($middleware = array_pop($middlewares)) {
+            $next = $this->last;
+            while ($middleware = array_pop($this->middlewares)) {
                 if ($middleware instanceof Middleware) {
-                    $next = function ($message) use ($middleware, $next) {
-                        return $middleware->execute($message, $next);
+                    $next = function () use ($middleware, $message, $handler, $next) {
+                        return $middleware->execute($message, $handler, $next);
                     };
                 } else {
                     throw new InvalidMiddleware('Middleware must be instance of Middleware interface');
@@ -51,13 +58,11 @@ namespace Domain
         /**
          * Invoke message handlers pipeline
          *
-         * @param object $message
-         *
          * @return mixed
          */
-        public function invoke($message)
+        public function invoke($message, $handler)
         {
-            return call_user_func($this->pipeline, $message);
+            return $this->create($message, $handler)();
         }
 
     }

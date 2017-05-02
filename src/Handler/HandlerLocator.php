@@ -19,7 +19,7 @@ namespace Domain\Handler
          *
          * @return object
          */
-        public function get($message);
+        public function resolve($message);
 
     }
 

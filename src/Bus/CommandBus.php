@@ -22,7 +22,10 @@ namespace Domain\Bus
          */
         public function execute($message)
         {
-            return $this->invoker->invoke($message);
+            $messageName = $this->messageExtractor->extract($message);
+            $handler = $this->handlerLocator->resolve($messageName);
+
+            return $this->invoker->invoke($message, $handler);
         }
 
         /**
@@ -34,7 +37,11 @@ namespace Domain\Bus
          */
         protected function process($message)
         {
-            echo 'TODO : Add handling' . PHP_EOL;
+            $messageName = $this->messageExtractor->extract($message);
+            $handler = $this->handlerLocator->resolve($messageName);
+            $method = $this->handlerMethodLocator->resolve($message, $handler);
+
+            return $handler->{$method}($message);
         }
 
     }
