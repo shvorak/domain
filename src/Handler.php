@@ -5,6 +5,7 @@ namespace Domain
 
     /**
      * Class Handler
+     *
      * @package Domain
      */
     class Handler
