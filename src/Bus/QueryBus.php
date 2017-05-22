@@ -18,7 +18,21 @@ namespace Domain\Bus
          */
         public function ask($message)
         {
-            // TODO: Implement ask() method.
+            return $this->invoker->execute($message);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        protected function process($message)
+        {
+            $messageName = $this->messageResolver->resolve($message);
+            $handlerName = $this->map->get($messageName);
+
+            $handler    = $this->handlerResolver->resolve($handlerName);
+            $method     = $this->handlerMethodResolver->resolve($message, $handler);
+
+            return $method->handle($message);
         }
 
     }

@@ -12,7 +12,7 @@ namespace Domain\Bus
      * Class CommandBusBuilder
      * @package Domain\Bus
      */
-    class CommandBusBuilder extends BusBuilder
+    class QueryBusBuilder extends BusBuilder
     {
 
         protected $providers = [];
@@ -34,7 +34,7 @@ namespace Domain\Bus
         /**
          * Returns new instance of CommandBus
          *
-         * @return CommandBus
+         * @return QueryBus
          */
         public function build()
         {
@@ -42,7 +42,7 @@ namespace Domain\Bus
                 $provider->register($map); return $map;
             }, new HandlersMap());
 
-            return new CommandBus(
+            return new QueryBus(
                 $map,
                 new MessageClassResolver(),
                 $this->handlerResolver,
