@@ -44,9 +44,9 @@ namespace Domain\Bus
 
             return new CommandBus(
                 $map,
-                new MessageClassResolver(),
-                $this->handlerResolver,
-                $this->handlerMethodResolver,
+                $this->getMessageResolver(),
+                $this->getHandlerResolver(),
+                $this->getHandlerMethodResolver(),
                 ...$this->middlewares
             );
         }

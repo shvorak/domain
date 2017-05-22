@@ -3,6 +3,11 @@
 namespace Domain
 {
 
+    use Domain\Handler\Method\NamedMethodResolver;
+    use Domain\Handler\SimpleResolver;
+    use Domain\Message\MessageClassResolver;
+    use Domain\Message\MessageResolver;
+
     abstract class BusBuilder
     {
 
@@ -12,14 +17,19 @@ namespace Domain
         protected $middlewares = [];
 
         /**
+         * @var MessageResolver
+         */
+        private $messageResolver;
+
+        /**
          * @var HandlerResolver
          */
-        protected $handlerResolver;
+        private $handlerResolver;
 
         /**
          * @var HandlerMethodResolver
          */
-        protected $handlerMethodResolver;
+        private $handlerMethodResolver;
 
         /**
          * Create new builder instance
@@ -39,11 +49,36 @@ namespace Domain
         public function using(Middleware ...$middleware)
         {
             // TODO : merge by value
-            $this->middlewares = $middleware;
+            $this->middlewares = array_merge($this->middlewares, $middleware);
             return $this;
         }
 
         /**
+         * Register message name resolver
+         *
+         * @param MessageResolver $resolver
+         *
+         * @return static
+         */
+        public function usingMessageResolver(MessageResolver $resolver)
+        {
+            $this->messageResolver = $resolver;
+            return $this;
+        }
+
+        /**
+         * Returns message name resolver
+         *
+         * @return MessageResolver
+         */
+        public function getMessageResolver()
+        {
+            return $this->messageResolver ?? new MessageClassResolver();
+        }
+
+        /**
+         * Register handler instance resolver
+         *
          * @param HandlerResolver $resolver
          *
          * @return static
@@ -55,6 +90,18 @@ namespace Domain
         }
 
         /**
+         * Returns HandlerResolver instance
+         *
+         * @return HandlerResolver
+         */
+        protected function getHandlerResolver()
+        {
+            return $this->handlerResolver ?? new SimpleResolver();
+        }
+
+        /**
+         * Register handler method callable resolver
+         *
          * @param HandlerMethodResolver $resolver
          *
          * @return static
@@ -63,6 +110,16 @@ namespace Domain
         {
             $this->handlerMethodResolver = $resolver;
             return $this;
+        }
+
+        /**
+         * Returns HandlerMethodResolver
+         *
+         * @return HandlerMethodResolver
+         */
+        protected function getHandlerMethodResolver()
+        {
+            return $this->handlerMethodResolver ?? new NamedMethodResolver();
         }
 
     }
