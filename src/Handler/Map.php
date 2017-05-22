@@ -1,23 +1,16 @@
 <?php
 
-namespace Domain\Handler\Providers
+namespace Domain\Handler
 {
 
     use Domain\Error\HandlerNotFound;
 
-    /**
-     * Class Map
-     *
-     * @package Domain\Handler\Providers
-     */
     abstract class Map
     {
-
         /**
          * @var array
          */
         protected $_map = [];
-
         /**
          * Returns `true` if handler found
          *
@@ -29,7 +22,6 @@ namespace Domain\Handler\Providers
         {
             return array_key_exists($message, $this->_map);
         }
-
         /**
          * Returns handler class for command
          *
@@ -46,7 +38,6 @@ namespace Domain\Handler\Providers
             }
             return $this->_map[$message];
         }
-
     }
 
 }

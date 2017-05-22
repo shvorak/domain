@@ -3,14 +3,11 @@
 namespace Domain
 {
 
-    use Domain\Handler\HandlerLocator;
-    use Domain\Handler\HandlerMethodLocator;
-    use Domain\Handler\Message\ClassBasedName;
-    use Domain\Handler\MessageNameExtractor;
-    use Domain\Handler\Method\ClassNameMethodLocator;
+    use Domain\Handler\Map;
+    use Domain\Message\MessageResolver;
 
     /**
-     * Class BaseBus
+     * Class Bus
      *
      * @package Domain
      */
@@ -18,53 +15,58 @@ namespace Domain
     {
 
         /**
-         * @var Invoker
+         * @var Map
+         */
+        protected $map;
+
+        /**
+         * @var Pipeline
          */
         protected $invoker;
 
         /**
-         * @var HandlerLocator
+         * @var MessageResolver
          */
-        protected $handlerLocator;
+        protected $messageResolver;
 
         /**
-         * @var HandlerMethodLocator
+         * @var HandlerResolver
          */
-        protected $handlerMethodLocator;
+        protected $handlerResolver;
 
         /**
-         * @var MessageNameExtractor
+         * @var HandlerMethodResolver
          */
-        protected $messageExtractor;
+        protected $handlerMethodResolver;
 
         /**
-         * BaseBus constructor.
+         * Bus constructor.
          *
-         * @param Middleware[]   $middlewares
-         * @param HandlerLocator $locator
-         *
-         * @internal param HandlerLocator $handlerLocator
+         * @param Map                   $map
+         * @param MessageResolver       $messageResolver
+         * @param HandlerResolver       $handlerResolver
+         * @param HandlerMethodResolver $handlerMethodResolver
+         * @param Middleware[]          ...$middlewares
          */
-        public function __construct(array $middlewares = [], HandlerLocator $locator)
+        public function __construct(
+            Map $map,
+            MessageResolver $messageResolver,
+            HandlerResolver $handlerResolver,
+            HandlerMethodResolver $handlerMethodResolver,
+            Middleware ...$middlewares
+        )
         {
-            $this->invoker = new Invoker($middlewares, function ($message) {
+            $this->invoker = new Pipeline($middlewares, function ($message) {
                 return $this->process($message);
             });
 
-            $this->handlerLocator = $locator;
-            $this->handlerMethodLocator = new ClassNameMethodLocator();
-
-            $this->messageExtractor = new ClassBasedName();
+            $this->map = $map;
+            $this->messageResolver = $messageResolver;
+            $this->handlerResolver = $handlerResolver;
+            $this->handlerMethodResolver = $handlerMethodResolver;
         }
 
-        /**
-         * Handle message
-         *
-         * @param object $message
-         *
-         * @return mixed
-         */
-        abstract protected function process($message);
+        protected abstract function process($message);
 
     }
 

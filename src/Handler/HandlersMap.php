@@ -1,16 +1,16 @@
 <?php
 
-namespace Domain\Handler\Providers
+namespace Domain\Handler
 {
 
     use Domain\Error\HandlerDuplication;
 
     /**
-     * Class Handlers
+     * Class HandlersMap
      *
-     * @package Domain\Handler\Providers
+     * @package Domain\Handler
      */
-    class Handlers extends Map
+    class HandlersMap extends Map
     {
 
         /**
@@ -21,7 +21,7 @@ namespace Domain\Handler\Providers
          *
          * @throws HandlerDuplication
          *
-         * @return Handlers
+         * @return HandlersMap
          */
         public function handle(string $message, string $handler)
         {

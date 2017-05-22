@@ -1,12 +1,11 @@
 <?php
 
-namespace Domain\Handler\Providers
+namespace Domain\Handler
 {
 
     /**
      * Interface HandlersProvider
-     *
-     * @package Domain\Handler\Providers
+     * @package Domain\Handler
      */
     interface HandlersProvider
     {
@@ -14,11 +13,11 @@ namespace Domain\Handler\Providers
         /**
          * Register handlers
          *
-         * @param Handlers $map
+         * @param HandlersMap $map
          *
          * @return void
          */
-        public function register(Handlers $map);
+        public function register(HandlersMap $map);
 
     }
 

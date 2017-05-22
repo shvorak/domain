@@ -5,43 +5,31 @@ namespace Domain\Bus
 
     use Domain\Bus;
 
-    /**
-     * Class CommandBus
-     *
-     * @package Domain\Bus
-     */
-    class CommandBus extends Bus
+    class CommandBus extends Bus implements CommandBusInterface
     {
 
         /**
-         * Execute command handler
-         *
-         * @param object $message
-         *
-         * @return mixed
-         */
-        public function execute($message)
-        {
-            $messageName = $this->messageExtractor->extract($message);
-            $handler = $this->handlerLocator->resolve($messageName);
-
-            return $this->invoker->invoke($message, $handler);
-        }
-
-        /**
-         * Handle message
-         *
          * @param object $message
          *
          * @return mixed
          */
         protected function process($message)
         {
-            $messageName = $this->messageExtractor->extract($message);
-            $handler = $this->handlerLocator->resolve($messageName);
-            $method = $this->handlerMethodLocator->resolve($message, $handler);
+            $messageName = $this->messageResolver->resolve($message);
+            $handlerName = $this->map->get($messageName);
 
-            return $handler->{$method}($message);
+            $handler = $this->handlerResolver->resolve($handlerName);
+            $method = $this->handlerMethodResolver->resolve($message, $handler);
+
+            return $method->handle($message);
+        }
+
+        /**
+         * @inheritdoc
+         */
+        public function execute($message)
+        {
+            return $this->invoker->execute($message);
         }
 
     }
