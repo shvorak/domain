@@ -5,6 +5,10 @@ namespace Domain\Bus
 
     use Domain\Bus;
 
+    /**
+     * Class CommandBus
+     * @package Domain\Bus
+     */
     class CommandBus extends Bus implements CommandBusInterface
     {
 
@@ -16,7 +20,7 @@ namespace Domain\Bus
         protected function process($message)
         {
             $messageName = $this->messageResolver->resolve($message);
-            $handlerName = $this->map->get($messageName);
+            $handlerName = $this->handlerMap->get($messageName);
 
             $handler = $this->handlerResolver->resolve($handlerName);
             $method = $this->handlerMethodResolver->resolve($message, $handler);

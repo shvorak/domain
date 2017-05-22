@@ -9,20 +9,22 @@ namespace Domain
     /**
      * Class Bus
      *
+     * Base message bus realization
+     *
      * @package Domain
      */
     abstract class Bus
     {
 
         /**
-         * @var Map
-         */
-        protected $map;
-
-        /**
          * @var Pipeline
          */
         protected $invoker;
+
+        /**
+         * @var Map
+         */
+        protected $handlerMap;
 
         /**
          * @var MessageResolver
@@ -42,14 +44,14 @@ namespace Domain
         /**
          * Bus constructor.
          *
-         * @param Map                   $map
+         * @param Map                   $handlerMap
          * @param MessageResolver       $messageResolver
          * @param HandlerResolver       $handlerResolver
          * @param HandlerMethodResolver $handlerMethodResolver
          * @param Middleware[]          ...$middlewares
          */
         public function __construct(
-            Map $map,
+            Map $handlerMap,
             MessageResolver $messageResolver,
             HandlerResolver $handlerResolver,
             HandlerMethodResolver $handlerMethodResolver,
@@ -60,7 +62,7 @@ namespace Domain
                 return $this->process($message);
             });
 
-            $this->map = $map;
+            $this->handlerMap = $handlerMap;
             $this->messageResolver = $messageResolver;
             $this->handlerResolver = $handlerResolver;
             $this->handlerMethodResolver = $handlerMethodResolver;
