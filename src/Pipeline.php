@@ -23,11 +23,11 @@ namespace Domain
          * Pipeline constructor.
          *
          * @param array    $middlewares
-         * @param callable $last
+         * @param callable $handler
          */
-        public function __construct(array $middlewares, callable $last)
+        public function __construct(array $middlewares, callable $handler)
         {
-            $this->pipeline = $this->create($middlewares, $last);
+            $this->pipeline = $this->create($middlewares, $handler);
         }
 
         /**

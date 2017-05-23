@@ -6,7 +6,7 @@ namespace Domain
     use Domain\Handler\Method\NamedMethodResolver;
     use Domain\Handler\SimpleResolver;
     use Domain\Message\MessageClassResolver;
-    use Domain\Message\MessageResolver;
+    use Domain\MessageResolver;
 
     abstract class BusBuilder
     {
@@ -27,7 +27,7 @@ namespace Domain
         private $handlerResolver;
 
         /**
-         * @var HandlerMethodResolver
+         * @var MethodResolver
          */
         private $handlerMethodResolver;
 
@@ -102,20 +102,20 @@ namespace Domain
         /**
          * Register handler method callable resolver
          *
-         * @param HandlerMethodResolver $resolver
+         * @param MethodResolver $resolver
          *
          * @return static
          */
-        public function usingHandlerMethodResolver(HandlerMethodResolver $resolver)
+        public function usingHandlerMethodResolver(MethodResolver $resolver)
         {
             $this->handlerMethodResolver = $resolver;
             return $this;
         }
 
         /**
-         * Returns HandlerMethodResolver
+         * Returns MethodResolver
          *
-         * @return HandlerMethodResolver
+         * @return MethodResolver
          */
         protected function getHandlerMethodResolver()
         {

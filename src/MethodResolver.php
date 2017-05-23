@@ -8,7 +8,7 @@ namespace Domain
      *
      * @package Domain
      */
-    interface HandlerMethodResolver
+    interface MethodResolver
     {
 
         /**

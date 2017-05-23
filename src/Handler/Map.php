@@ -38,6 +38,17 @@ namespace Domain\Handler
             }
             return $this->_map[$message];
         }
+
+        /**
+         * Register handler for message
+         *
+         * @param string $message
+         * @param string $handler
+         *
+         * @return mixed
+         */
+        abstract public function add(string $message, string $handler);
+
     }
 
 }

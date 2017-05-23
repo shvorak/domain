@@ -3,6 +3,8 @@
 namespace Domain\Message
 {
 
+    use Domain\MessageResolver;
+
     class MessageClassResolver implements MessageResolver
     {
 

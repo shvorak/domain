@@ -4,7 +4,7 @@ namespace Domain
 {
 
     use Domain\Handler\Map;
-    use Domain\Message\MessageResolver;
+    use Domain\MessageResolver;
 
     /**
      * Class Bus
@@ -37,24 +37,24 @@ namespace Domain
         protected $handlerResolver;
 
         /**
-         * @var HandlerMethodResolver
+         * @var MethodResolver
          */
         protected $handlerMethodResolver;
 
         /**
          * Bus constructor.
          *
-         * @param Map                   $handlerMap
-         * @param MessageResolver       $messageResolver
-         * @param HandlerResolver       $handlerResolver
-         * @param HandlerMethodResolver $handlerMethodResolver
-         * @param Middleware[]          ...$middlewares
+         * @param Map             $handlerMap
+         * @param MessageResolver $messageResolver
+         * @param HandlerResolver $handlerResolver
+         * @param MethodResolver  $handlerMethodResolver
+         * @param Middleware[]    ...$middlewares
          */
         public function __construct(
             Map $handlerMap,
             MessageResolver $messageResolver,
             HandlerResolver $handlerResolver,
-            HandlerMethodResolver $handlerMethodResolver,
+            MethodResolver $handlerMethodResolver,
             Middleware ...$middlewares
         )
         {

@@ -4,7 +4,7 @@ namespace Domain\Handler\Method
 {
 
     use Domain\Handler;
-    use Domain\HandlerMethodResolver;
+    use Domain\MethodResolver;
     use Domain\Error\HandlerMethodNotFound;
     use Domain\Error\HandlerMethodNotCallable;
 
@@ -13,7 +13,7 @@ namespace Domain\Handler\Method
      *
      * @package Domain\Handler\Method
      */
-    class NamedMethodResolver implements HandlerMethodResolver
+    class NamedMethodResolver implements MethodResolver
     {
 
         /**

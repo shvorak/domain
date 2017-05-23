@@ -5,9 +5,9 @@ namespace Domain\Handler\Method
 
     use Domain\Error;
     use Domain\Handler;
-    use Domain\HandlerMethodResolver;
+    use Domain\MethodResolver;
 
-    class InvokeHandlerResolver implements HandlerMethodResolver
+    class InvokeResolver implements MethodResolver
     {
 
         /**
