@@ -39,14 +39,16 @@ namespace Domain\Plugin
          *
          * @throws \Exception
          *
-         * @return mixed|void
+         * @return mixed
          */
         function execute($message, callable $next)
         {
             $this->logger->info('Starting to processing ' . get_class($message));
             try {
-                $next($message);
+                $result = $next($message);
                 $this->logger->info('Completed processing ' . get_class($message));
+
+                return $result;
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
 

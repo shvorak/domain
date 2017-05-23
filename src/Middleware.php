@@ -17,7 +17,7 @@ namespace Domain
          * @param object   $message
          * @param callable $next
          *
-         * @return mixed|void
+         * @return mixed
          */
         function execute($message, callable $next);
 
