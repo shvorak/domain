@@ -13,8 +13,36 @@ namespace Domain\Handler\Method
      *
      * @package Domain\Handler\Method
      */
-    class NamedMethodResolver implements MethodResolver
+    class MessageNameResolver implements MethodResolver
     {
+
+        /**
+         * @var string
+         */
+        private $prefix;
+
+        /**
+         * @var string
+         */
+        private $suffix;
+
+        /**
+         * @var int
+         */
+        private $suffixLength;
+
+        /**
+         * MessageNameResolver constructor.
+         *
+         * @param string $prefix
+         * @param string $suffix
+         */
+        public function __construct($prefix = 'handle', $suffix = '')
+        {
+            $this->suffix = $suffix;
+            $this->suffixLength = strlen($suffix);
+            $this->prefix = $prefix;
+        }
 
         /**
          * @inheritdoc
@@ -24,8 +52,11 @@ namespace Domain\Handler\Method
             $reflect = new \ReflectionClass($message);
             $unqualified = $reflect->getShortName();
 
-            $prefix = 'handle';
-            $method = $prefix . ucfirst($unqualified);
+            $method = $this->prefix . ucfirst($unqualified);
+
+            if (substr($method, $this->suffixLength * -1) === $this->suffix) {
+                $method = substr($method, 0, strlen($method) - $this->suffixLength);
+            }
 
             if (false === method_exists($handler, $method)) {
                 throw new HandlerMethodNotFound('Method ' . $method . ' not found in handler class');

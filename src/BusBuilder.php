@@ -3,7 +3,7 @@
 namespace Domain
 {
 
-    use Domain\Handler\Method\NamedMethodResolver;
+    use Domain\Handler\Method\MessageNameResolver;
     use Domain\Handler\SimpleResolver;
     use Domain\Message\MessageClassResolver;
     use Domain\MessageResolver;
@@ -119,7 +119,7 @@ namespace Domain
          */
         protected function getHandlerMethodResolver()
         {
-            return $this->handlerMethodResolver ?? new NamedMethodResolver();
+            return $this->handlerMethodResolver ?? new MessageNameResolver();
         }
 
     }
