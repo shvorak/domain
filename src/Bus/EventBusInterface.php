@@ -18,7 +18,7 @@ namespace Domain\Bus
          *
          * @return void
          */
-        public function emit($event) : void;
+        public function emit($event);
 
     }
 
