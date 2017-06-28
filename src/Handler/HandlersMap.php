@@ -23,7 +23,7 @@ namespace Domain\Handler
          *
          * @return HandlersMap
          */
-        public function add(string $message, string $handler)
+        public function add($message, $handler)
         {
             if ($this->has($message)) {
                 throw new HandlerDuplication("Handler for {$message} already registered");

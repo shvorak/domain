@@ -48,14 +48,14 @@ namespace Domain
          * @param MessageResolver $messageResolver
          * @param HandlerResolver $handlerResolver
          * @param MethodResolver  $handlerMethodResolver
-         * @param Middleware[]    ...$middlewares
+         * @param Middleware[]    $middlewares
          */
         public function __construct(
             Map $handlerMap,
             MessageResolver $messageResolver,
             HandlerResolver $handlerResolver,
             MethodResolver $handlerMethodResolver,
-            Middleware ...$middlewares
+            $middlewares
         )
         {
             $this->invoker = new Pipeline($middlewares, function ($message) {

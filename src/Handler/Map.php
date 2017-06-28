@@ -7,10 +7,12 @@ namespace Domain\Handler
 
     abstract class Map
     {
+
         /**
          * @var array
          */
         protected $_map = [];
+
         /**
          * Returns `true` if handler found
          *
@@ -18,7 +20,7 @@ namespace Domain\Handler
          *
          * @return bool
          */
-        public function has(string $message) : bool
+        public function has($message)
         {
             return array_key_exists($message, $this->_map);
         }
@@ -31,7 +33,7 @@ namespace Domain\Handler
          *
          * @return mixed
          */
-        public function get(string $message)
+        public function get($message)
         {
             if (false === $this->has($message)) {
                 throw new HandlerNotFound("Handler for message {$message} not registered");
@@ -47,7 +49,7 @@ namespace Domain\Handler
          *
          * @return mixed
          */
-        abstract public function add(string $message, string $handler);
+        abstract public function add($message, $handler);
 
     }
 

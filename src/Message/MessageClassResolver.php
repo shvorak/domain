@@ -15,7 +15,7 @@ namespace Domain\Message
          *
          * @return string
          */
-        public function resolve($message): string
+        public function resolve($message)
         {
             return get_class($message);
         }

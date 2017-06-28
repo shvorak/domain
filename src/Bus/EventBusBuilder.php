@@ -48,7 +48,7 @@ namespace Domain\Bus
                 $this->getMessageResolver(),
                 $this->getHandlerResolver(),
                 $this->getHandlerMethodResolver(),
-                ...$this->middlewares
+                $this->middlewares
             );
         }
 

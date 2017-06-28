@@ -19,7 +19,7 @@ namespace Domain\Handler
          *
          * @return ListenersMap
          */
-        public function add(string $message, string $handler)
+        public function add($message, $handler)
         {
             if ($this->has($message) === false) {
                 $this->_map[$message] = [];
@@ -27,6 +27,11 @@ namespace Domain\Handler
             $this->_map[$message][] = $handler;
 
             return $this;
+        }
+
+        public function get($message)
+        {
+            return $this->has($message) ? $this->_map[$message] : [];
         }
 
     }

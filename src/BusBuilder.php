@@ -46,10 +46,10 @@ namespace Domain
          *
          * @return static
          */
-        public function using(Middleware ...$middleware)
+        public function using($middleware)
         {
             // TODO : merge by value
-            $this->middlewares = array_merge($this->middlewares, $middleware);
+            $this->middlewares = array_merge($this->middlewares, func_get_args());
             return $this;
         }
 
@@ -73,7 +73,10 @@ namespace Domain
          */
         public function getMessageResolver()
         {
-            return $this->messageResolver ?? new MessageClassResolver();
+            if ($this->messageResolver === null) {
+                return new MessageClassResolver();
+            }
+            return $this->messageResolver;
         }
 
         /**
@@ -96,7 +99,10 @@ namespace Domain
          */
         protected function getHandlerResolver()
         {
-            return $this->handlerResolver ?? new SimpleResolver();
+            if ($this->handlerResolver === null) {
+                return new SimpleResolver();
+            }
+            return $this->handlerResolver;
         }
 
         /**
@@ -119,7 +125,10 @@ namespace Domain
          */
         protected function getHandlerMethodResolver()
         {
-            return $this->handlerMethodResolver ?? new MessageNameResolver();
+            if ($this->handlerMethodResolver === null) {
+                return new MessageNameResolver();
+            }
+            return $this->handlerMethodResolver;
         }
 
     }

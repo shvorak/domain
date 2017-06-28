@@ -17,7 +17,7 @@ namespace Domain
          *
          * @return string
          */
-        public function resolve($message) : string;
+        public function resolve($message);
 
     }
 
